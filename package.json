@@ -1,0 +1,26 @@
+{
+  "name": "render-list",
+  "version": "1.0.0",
+  "description": "针对前端处理海量数据，写了个人的解决方案！",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "keywords": [],
+  "author": "mashilei@meituan.com",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "koa": "^2.13.1",
+    "koa-router": "^10.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/shileima/render-list.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shileima/render-list/issues"
+  },
+  "homepage": "https://github.com/shileima/render-list#readme"
+}
