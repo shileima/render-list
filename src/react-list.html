@@ -1,0 +1,115 @@
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <!-- <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script> -->
+
+  <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script> -->
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script>
+
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+  <title>虚拟列表-react</title>
+  <style>
+    .container {
+      display: flex;
+      border: 1px solid;
+      overflow-y: auto;
+      height: var(--containerHeight);
+    }
+
+    .scroll-blank {
+      height: var(--height);
+    }
+
+    .scroll {
+      margin-top: var(--marginTop);
+    }
+
+    .scroll-item {
+      height: var(--itemHeight);
+      /* background-color: pink; */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    const App = () => {
+      const { useRef, useState, useEffect, useMemo, useCallback } = window.React
+
+      const container = useRef(null)
+      const [list, setList] = useState([])
+      const [activeList, setActiveList] = useState([])
+      const containerHeight = 400
+      const itemHeight = 20
+      const height = list.length * itemHeight
+      const [start, setStart] = useState(0)
+      const [marginTop, setMarginTop] = useState(0)
+
+      // 自定义 Hooks -- 初始加载不执行
+      function useDidUpdateEffect(fn, inputs) {
+        const didMountRef = useRef(false);
+        useEffect(() => {
+          if (didMountRef.current) fn();
+          else didMountRef.current = true;
+        }, inputs);
+      }
+
+      const createList = () => {
+        const list = []
+        let i = 0
+        while (i < 100000) {
+          list.push(`${i++}-----------${Math.random()}`)
+        }
+        return list
+      }
+
+      useEffect(() => {
+        console.log('useEffect one');
+        container.current.addEventListener('scroll', ({ target }) => {
+          const { scrollTop } = target
+          const itemNum = scrollTop / itemHeight
+          setStart(parseInt(itemNum))
+          setMarginTop(scrollTop)
+        })
+        const list = createList();
+        setList(list)
+        setTimeout(() => setActiveList(list.slice(start, start + 20)), 0)
+      }, [])
+
+      useDidUpdateEffect(() => {
+        console.log('useEffect two');
+        setActiveList(list.slice(start, start + 20))
+      }, [start])
+
+
+      return (<div ref={container} className="container" style={{
+        "--containerHeight": containerHeight + 'px',
+        "--height": height + 'px',
+        "--itemHeight": itemHeight + 'px',
+        "--marginTop": marginTop + 'px',
+      }}>
+        <div className="scroll-blank"></div>
+        <div className="scroll">
+          {
+            activeList.map((item, index) => (
+              <div key={item} className="scroll-item">{item}</div>
+            ))
+          }
+        </div>
+      </div>)
+    };
+
+    console.log(React, ReactDOM);
+    ReactDOM.render(<App />, document.querySelector('#app'))
+  </script>
+</body>
+
+</html>
