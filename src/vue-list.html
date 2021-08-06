@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <script src="https://unpkg.com/vue@next"></script>
-    <title>虚拟列表</title>
+    <title>vue3列表</title>
     <style>
       .container {
         display: flex;
@@ -48,8 +48,8 @@
         const list = []
 
         let i = 0
-        while (i < 1000) {
-          list.push(i++)
+        while (i < 100000) {
+          list.push(`${i++}-----------${Math.random()}`)
         }
 
         return list
