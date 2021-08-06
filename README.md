@@ -1,6 +1,7 @@
 # 前端海量数据处理
 
-前端海量数据处理，indexDB + React 方案
+Koa + webWorker + indexDB 实现
+
 ### 启动步骤：
 
 1. npm install
