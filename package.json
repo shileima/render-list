@@ -12,7 +12,8 @@
   "dependencies": {
     "koa": "^2.13.1",
     "koa-router": "^10.0.0",
-    "opn": "^6.0.0"
+    "opn": "^6.0.0",
+    "react-loading": "^2.0.3"
   },
   "devDependencies": {},
   "repository": {
