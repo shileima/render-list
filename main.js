@@ -27,4 +27,4 @@ console.log(`浏览器预览：`, `\x1B[36mhttp://localhost:${port}\x1B[0m`)
 
 // open -a "/Applications/Google Chrome.app" "http://www.baidu.com"
 // require('child_process').execSync(`open http://localhost:${port}`);
-opn(`http://localhost:${port}/react-list-worker.html`, { app: ['google chrome', '--incognito'] });
+opn(`http://localhost:${port}/react-worker.html`, { app: ['google chrome', '--incognito'] });
