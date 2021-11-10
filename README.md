@@ -8,4 +8,4 @@ Koa + webWorker + indexDB 实现
 
 2. npm start
 
-3. 访问 http://localhost:9517
+3. 请访问 http://localhost:9517
